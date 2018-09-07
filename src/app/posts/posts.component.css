@@ -1,0 +1,4 @@
+.overlay {
+    pointer-events: none;
+    opacity: .5;
+}

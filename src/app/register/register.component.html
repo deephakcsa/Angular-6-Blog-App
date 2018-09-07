@@ -1,0 +1,124 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">User Registration</div>
+  <div class="panel-body">
+    <form (ngSubmit)="register(userForm.value, userForm.valid)" #userForm="ngForm">
+
+      <div class="form-group" [ngClass]="{'has-error':!usernameVar.valid && (usernameVar.touched || userForm.submitted)}">
+        <label for="username" class="control-label">Username</label>
+        <input class="form-control" type="text" id="username" [(ngModel)]="user.username" name="username" placeholder="Username"
+          required minlength="5" #usernameVar="ngModel" />
+        <div *ngIf="!usernameVar.valid && (usernameVar.touched || userForm.submitted)">
+          <div *ngIf="usernameVar.errors.required" class="alert alert-danger">
+            Please enter username
+          </div>
+          <div *ngIf="usernameVar.errors.minlength" class="alert alert-danger">
+            Username must be atleast 5 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!passwordVar.valid && (passwordVar.touched || userForm.submitted)}">
+        <label for="password" class="control-label">Password</label>
+        <input class="form-control" type="password" id="password" [(ngModel)]="user.password" name="password" placeholder="Password"
+          required minlength="6" #passwordVar="ngModel" />
+        <div *ngIf="!passwordVar.valid && (passwordVar.touched || userForm.submitted)">
+          <div *ngIf="passwordVar.errors.required" class="alert alert-danger">
+            Please enter password
+          </div>
+          <div *ngIf="passwordVar.errors.minlength" class="alert alert-danger">
+            Password must have atleast 6 characters
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group" [ngClass]="{'has-error':!firstnameVar.valid && (firstnameVar.touched || userForm.submitted)}">
+        <label for="firstname" class="control-label">Firstname</label>
+        <input class="form-control" type="text" id="firstname" [(ngModel)]="user.firstname" name="firstname" placeholder="Firstname"
+          required minlength="5" #firstnameVar="ngModel" />
+        <div *ngIf="!firstnameVar.valid && (firstnameVar.touched || userForm.submitted)">
+          <div *ngIf="firstnameVar.errors.required" class="alert alert-danger">
+            Please enter your firstname
+          </div>
+          <div *ngIf="firstnameVar.errors.minlength" class="alert alert-danger">
+            Please enter a valid firstname
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!lastnameVar.valid && (lastnameVar.touched || userForm.submitted)}">
+        <label for="lastname" class="control-label">Lastname</label>
+        <input class="form-control" type="text" id="lastname" [(ngModel)]="user.lastname" name="lastname" placeholder="Lastname"
+          required minlength="3" #lastnameVar="ngModel" />
+        <div *ngIf="!lastnameVar.valid && (lastnameVar.touched || userForm.submitted)">
+          <div *ngIf="lastnameVar.errors.required" class="alert alert-danger">
+            Please enter your lastname
+          </div>
+          <div *ngIf="lastnameVar.errors.minlength" class="alert alert-danger">
+            Please enter a valid lastname
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!emailVar.valid && (emailVar.touched || userForm.submitted)}">
+        <label for="email" class="control-label">Email</label>
+        <input class="form-control" type="email" id="email" [(ngModel)]="user.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          name="email" placeholder="Email" required #emailVar="ngModel" />
+        <div *ngIf="!emailVar.valid && (emailVar.touched || userForm.submitted)">
+          <div *ngIf="emailVar.errors.required" class="alert alert-danger">
+            Please enter your email
+          </div>
+          <div *ngIf="emailVar.errors.pattern" class="alert alert-danger">
+            Please enter a valid email
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!gender.valid && (gender.touched || userForm.submitted)}">
+        <div class="radio">
+          <label class="control-label">
+            <input type="radio" name="gender" required value="Male" [(ngModel)]="user.gender" #gender="ngModel" /> Male
+          </label>
+          <label class="control-label">
+            <input type="radio" name="gender" required value="Female" [(ngModel)]="user.gender" #gender="ngModel" /> Female
+          </label>
+        </div>
+        <div class="alert alert-danger" *ngIf="!gender.valid && (gender.touched || userForm.submitted)">
+          Please select gender
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error':!phoneVar.valid && (phoneVar.touched || userForm.submitted)}">
+          <label for="phone" class="control-label">Phone Number</label>
+          <input class="form-control" type="phone" id="phone" [(ngModel)]="user.phone" pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"
+            name="phone" placeholder="Phone number" required #phoneVar="ngModel" />
+          <div *ngIf="!phoneVar.valid && (phoneVar.touched || userForm.submitted)">
+            <div *ngIf="phoneVar.errors.required" class="alert alert-danger">
+              Please enter your phone number
+            </div>
+            <div *ngIf="phoneVar.errors.pattern" class="alert alert-danger">
+              Please enter a valid phone number
+            </div>
+          </div>
+        </div>
+  
+
+      <div class="form-group" [ngClass]="{'has-error':!locationVar.valid && (locationVar.touched || userForm.submitted)}">
+        <label for="location" class="control-label">Location</label>
+        <input class="form-control" type="text" id="location" [(ngModel)]="user.location" name="location" placeholder="Location"
+          required minlength="2" #locationVar="ngModel" />
+        <div *ngIf="!locationVar.valid && (locationVar.touched || userForm.submitted)">
+          <div *ngIf="locationVar.errors.required" class="alert alert-danger">
+            Please enter location
+          </div>
+          <div *ngIf="locationVar.errors.minlength" class="alert alert-danger">
+              Please enter a valid location
+          </div>
+        </div>
+      </div>
+
+
+      <button [disabled]="!userForm.valid" class="btn btn-primary" type="submit">Register</button>
+    </form>
+  </div>
+</div>

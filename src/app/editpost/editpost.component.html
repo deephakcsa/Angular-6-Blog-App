@@ -1,0 +1,13 @@
+<div>
+  <form>
+  <div class="form-group">
+    <input type="text" class="form-control" id="title" name="title" [(ngModel)]="post.title" placeholder="Title">
+  </div>
+  <div class="form-group">
+    <textarea class="form-control" name="description" [(ngModel)]="post.description" id="description" rows="7" placeholder="Description"></textarea>
+  </div>
+  <button type="button" class="btn btn-default" (click)="save()">Save</button>
+  <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+</form>
+<br><br>
+</div>

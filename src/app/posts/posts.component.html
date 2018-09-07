@@ -1,0 +1,72 @@
+<div>
+    <router-outlet name="editpost" (activate)='onActivate($event)' (deactivate)='onDeactivate($event)'></router-outlet>
+</div>
+<div *ngIf="posts" class="col-md-8" [ngClass]="{'overlay': isOverlayVisible }">
+  <div *ngFor="let post of posts; let i = index">
+    <div class="container">
+      <div class="col-md-11">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <section class="post-heading">
+              <div class="row">
+                <div class="col-md-15">
+                  <div class="media">
+                    <div class="media-body">
+                      <div class="col-md-11">
+                        <a class="anchor-username"><h4 class="media-heading">{{post.username}}</h4></a>
+                      </div>
+                      <div *ngIf="post.isUser" class="col-md-offset-11">
+                        <a href="#" [routerLink]="[{outlets:{editpost:['editpost',post._id]}}]">
+                          <span class="glyphicon glyphicon-edit"></span> Edit
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="post-body">
+              <h5>{{post.title}}</h5>
+            </section>
+            <section class="post-body">
+              <h6>{{post.description}}</h6>
+            </section>
+            <section class="post-footer">
+              <hr>
+              <div *ngIf="post.likes.length > 0">
+                <section class="post-body">
+                  <h6>Liked by {{post.likes}}</h6>
+                </section>
+              </div>
+              <div class="post-footer-option container">
+                <ul class="list-unstyled">
+                  <button type="button" class="btn btn-default btn-sm" (click)="like(post._id)" [disabled]="post.like">
+                    <span class="glyphicon glyphicon-thumbs-up"></span> {{post.like ? 'Liked':'Like'}}
+                  </button>
+                  <button *ngIf="post.isUser" type="button" class="btn btn-default btn-sm" (click)="delete(post._id)">
+                    <span class="glyphicon glyphicon-remove"></span> Delete
+                  </button>
+                  <app-comments [postId]="post._id"></app-comments>
+                  <br>
+                </ul>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div *ngIf="posts">
+  <div *ngFor="let post of posts; let i = index">
+    <p>{{post.username}}</p>
+    <p>{{post.title}}</p>
+    <p>{{post.description}}</p>
+    <button [disabled]="post.like" (click)="like(post._id)">{{post.like ? 'Liked':'Like'}}</button>
+    <button (click)="delete(post._id)">Delete</button>
+    <app-comments [postId]="post._id"></app-comments>
+    <br><br><br>
+  </div>
+</div> -->

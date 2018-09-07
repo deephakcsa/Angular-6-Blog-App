@@ -1,0 +1,20 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+      Create Post
+    </div>
+    <div class="panel-body">
+        <form>
+            <div class="form-group">
+              <label>Post Title</label>
+              <input type="text" [(ngModel)]="post.title" name="title" class="form-control" placeholder="Title">
+            </div>
+            <div class="form-group">
+              <label>Post Description</label>
+              <textarea [(ngModel)]="post.description" rows="7" name="description" class="form-control" placeholder="Description"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default" (click)="create()">Create Post</button>
+          </form>
+          
+    </div>
+  
+  </div>

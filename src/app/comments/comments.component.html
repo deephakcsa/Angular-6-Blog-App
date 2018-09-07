@@ -1,0 +1,69 @@
+<!-- <button (click)="togglecomments()">{{state ? 'Hide Comment':'Show Comment'}}</button> -->
+<button type="button" class="btn btn-default btn-sm" (click)="togglecomments()">
+    <span class="glyphicon glyphicon-comment"></span> {{state ? 'Hide Comments':'Show Comments'}}
+</button>
+<div *ngIf="state">
+    <br><br>
+    <div *ngFor="let comment of comments">
+        <div class="container">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <section class="post-heading">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <a class="anchor-username"><h4 class="media-heading">{{comment.username}}</h4></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="post-body">
+                            <h5>{{comment.body}}</h5>
+                        </section>
+                        <section class="post-footer">
+                            <hr>
+                            <div *ngIf="comment.likes.length > 0">
+                                <section class="post-body">
+                                    <h6>Liked by {{comment.likes}}</h6>
+                                </section>
+                            </div>
+                            <div class="post-footer-option container">
+                                <ul class="list-unstyled">
+                                    <button type="button" class="btn btn-default btn-sm" (click)="likecomment(comment._id)" [disabled]="comment.like">
+                                        <span class="glyphicon glyphicon-thumbs-up"></span> {{comment.like ? 'Liked':'Like'}}
+                                    </button>
+                                    <button *ngIf="comment.isUser" type="button" class="btn btn-default btn-sm" (click)="deletecomment(comment._id)">
+                                        <span class="glyphicon glyphicon-remove"></span> Delete
+                                    </button>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h5><span class="label label-default">Add Comment</span></h5>
+    <form class="col-md-6">
+        <div class="form-group">
+            <input type="text" class="form-control" name="body" placeholder="Comment" [(ngModel)]="commentForm.body">
+        </div>
+        <button type="button" class="btn btn-default btn-sm" (click)="addcomment()">Add Comment</button>
+    </form>
+</div>
+
+
+<!-- <div class="post-footer-comment-wrapper">
+    <div class="comment-form">
+    </div>
+    <div class="comment">
+        <div class="media">
+            <div class="media-body">
+                <a class="anchor-username"><h4 class="media-heading">{{comment.username}}</h4></a>
+            </div>
+        </div>
+    </div>
+</div> -->
